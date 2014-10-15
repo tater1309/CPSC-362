@@ -1,3 +1,8 @@
+file:///home/brett/workspace/CPSC362/bin/E_Commerce_Layout.class
+file:///home/brett/workspace/CPSC362/bin/E_Commerce_Layout$1.class
+file:///home/brett/workspace/CPSC362/src/E_Commerce_Layout.java
+
+
 import java.awt.EventQueue;
 
 
@@ -122,7 +127,7 @@ public class E_Commerce_Layout {
 		JList list = new JList();
 		list.setPreferredSize(new Dimension(800, 535));
 		scrollableItems.add(list);
-		
+
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setPreferredSize(new Dimension(15, 530));
 		scrollableItems.add(scrollBar);
