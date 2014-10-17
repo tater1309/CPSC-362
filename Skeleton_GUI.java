@@ -5,6 +5,27 @@ file:///home/brett/workspace/CPSC362/src/E_Commerce_Layout.java
 
 import java.awt.EventQueue;
 
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JToolBar;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JTextPane;
+import javax.swing.JTabbedPane;
+import javax.swing.BoxLayout;
+import java.awt.Component;
+import java.awt.BorderLayout;
+import java.awt.Rectangle;
+import java.awt.Point;
+import javax.swing.JScrollBar;
+import javax.swing.JList;
+
 
 public class E_Commerce_Layout {
 
