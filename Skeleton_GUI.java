@@ -28,6 +28,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.SpringLayout;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -37,16 +38,87 @@ import java.awt.event.MouseEvent;
 
 public class E_Commerce_Layout {
 
+/**
+ * Main application: frame
+ */
 	private JFrame frame;
+	private CardLayout frameContentPaneLayout;
+	
+/**
+ * frame -> frame_Card0_Content
+ */
+	 private JPanel frame_Card0_Content;
+	 
+/**
+ * frame -> frame_Card1_Login
+ */
+	private JPanel frame_Card1_Login;
+	private GridBagLayout frame_Card1_Login_Layout;
+	private JButton btn_frame_Card1_Login_return;
+	
+/**
+ * frame -> frame_Card1_Login->sub_Login Panel
+ */
+	private JPanel sub_Login;
+	private GridBagConstraints gbc_Sub_Login;
+	private JTextField textField_Username;
+	private JTextField textField_Password;
+	private JButton btnLogin;
+	private JButton btnNewButton_4;
+	private JButton btnNewButton_5;
+	
+/**
+ * frame -> frame_Card0_Content -> header Panel
+ */
+	private JPanel header;
+	private JLabel lblLogo;
 	private JTextField txtSearchBar;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JPanel BodyContent;
-	private CardLayout BodyContentLayout;
+	private JButton btnNewButton_search;
+	
+/**
+ * frame -> frame_Card0_Content -> header -> subHeader Panel
+ */
+	private JPanel subHeader;
+	private JLabel lblAccountInformation;
+	private JButton btnShoppingCart;
+	
+/**
+ * frame -> sideBar Panel
+ */
+	private JPanel sideBar;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
+	private JButton btnNewButton_3;
+	
+/**
+ * frame -> bodyContent Panel
+ */
+	private JPanel bodyContent;
+	private CardLayout bodyContentLayout;
+	
+/**
+ * frame -> bodyContent -> user Panel
+ */
+	private JPanel user;
+	
+/**
+ * frame -> bodyContent -> guest Panel
+ */
+	private JPanel guest;
+	
+/**
+ * frame -> bodyContent -> admin Panel
+ */
+	private JPanel admin;
+	
+	
+	private JPanel scrollableItems;
+	private JList list;
+	private JScrollBar scrollBar;
 
-	/**
-	 * Launch the application.
-	 */
+/**
+ * Launch the application.
+ */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -71,27 +143,42 @@ public class E_Commerce_Layout {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+	
+	/*
+	 * Main Application: frame
+	 */
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1024, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(
-				new FlowLayout(FlowLayout.CENTER, 5, 5));
+		frameContentPaneLayout = new CardLayout();
+		frame.getContentPane().setLayout(frameContentPaneLayout);
 
-		JPanel Header = new JPanel();
-		Header.setPreferredSize(new Dimension(1024, 100));
-		frame.getContentPane().add(Header);
-		Header.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+	/*
+	 * frame -> frame_Card0_Content Panel
+	 */
+		frame_Card0_Content = new JPanel();
+		frame_Card0_Content.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
+		frame.getContentPane().add(frame_Card0_Content, "Card0_Content");
+		
+	/*
+	 * frame -> frame_Card0_Content -> header Panel
+	 */
+		header = new JPanel();
+		header.setPreferredSize(new Dimension(1024, 100));
+		header.setBorder(new EmptyBorder(0,0,200,0));
+		frame_Card0_Content.add(header);
+		header.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		JLabel lblLogo = new JLabel("LOGO");
+		lblLogo = new JLabel("LOGO");
+		lblLogo.setBorder(new EmptyBorder(0,25,0,25));
+		lblLogo.setFont(new Font("Times New Roman", Font.PLAIN, 48));
 		lblLogo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				BodyContentLayout.next(BodyContent);
+				bodyContentLayout.next(bodyContent);
 			}
 		});
-		lblLogo.setPreferredSize(new Dimension(200, 100));
-		lblLogo.setFont(new Font("Times New Roman", Font.PLAIN, 48));
-		Header.add(lblLogo);
+		header.add(lblLogo);
 
 		txtSearchBar = new JTextField();
 		txtSearchBar.addFocusListener(new FocusAdapter() {
@@ -107,131 +194,178 @@ public class E_Commerce_Layout {
 		});
 		txtSearchBar.setPreferredSize(new Dimension(300, 40));
 		txtSearchBar.setText("Search Bar...");
-		Header.add(txtSearchBar);
+		header.add(txtSearchBar);
 		txtSearchBar.setColumns(30);
 
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setPreferredSize(new Dimension(25, 40));
-		Header.add(btnNewButton);
+		btnNewButton_search = new JButton("...");
+		btnNewButton_search.setPreferredSize(new Dimension(25, 40));
+		btnNewButton_search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+			}
+		});
+		header.add(btnNewButton_search);
 
-		JPanel subHeader = new JPanel();
-		subHeader.setPreferredSize(new Dimension(435, 100));
-		Header.add(subHeader);
+	/*
+	 * frame -> frame_Card0_Content -> header -> subHeader Panel
+	 */
+		subHeader = new JPanel();
+		subHeader.setPreferredSize(new Dimension(450, 100));
+		subHeader.setBorder(new EmptyBorder(0,35,0,0));
+		header.add(subHeader);
 		subHeader.setLayout(null);
 
-		JLabel lblAccountInformation = new JLabel("    Account Information-");
-		lblAccountInformation.setPreferredSize(new Dimension(300, 85));
-		lblAccountInformation.setBounds(0, 12, 300, 88);
+		lblAccountInformation = new JLabel("Account Information");
+		lblAccountInformation.setBounds(40, 12, 142, 15);
 		subHeader.add(lblAccountInformation);
-		
-		JButton btnShoppingCart = new JButton("Shopping Cart");
-		btnShoppingCart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+
+		btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnLogin.setBounds(306, 4, 120, 30);
+		btnLogin.setPreferredSize(new Dimension(120,30));
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				frameContentPaneLayout.show(frame.getContentPane(), "Card1_Login");
 			}
 		});
+		subHeader.add(btnLogin);
+		
+		btnShoppingCart = new JButton("Shopping Cart");
 		btnShoppingCart.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnShoppingCart.setBounds(306, 63, 117, 25);
+		btnShoppingCart.setBounds(306, 46, 120, 30);
+		btnShoppingCart.setPreferredSize(new Dimension(120,30));
+		btnShoppingCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+			}
+		});
 		subHeader.add(btnShoppingCart);
 
-		BodyContent = new JPanel();
-		BodyContent.setPreferredSize(new Dimension(1000, 600));
-		BodyContentLayout = new CardLayout();
-		BodyContent.setLayout(BodyContentLayout);
-		frame.getContentPane().add(BodyContent);
-
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				BodyContentLayout.show(BodyContent, "Login_Panel");
+	/*
+	 * frame -> frame_Card0_Content -> sideBar Panel
+	 */
+		sideBar = new JPanel();
+		sideBar.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
+		sideBar.setPreferredSize(new Dimension(160, 625));
+		sideBar.setBorder(new LineBorder(Color.BLACK));
+		frame_Card0_Content.add(sideBar);
+		
+		btnNewButton_1 = new JButton("Best Sellers");
+		btnNewButton_1.setPreferredSize(new Dimension(144, 25));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 			}
 		});
-		btnLogin.setBounds(306, 12, 117, 25);
-		subHeader.add(btnLogin);
-
-		JPanel Guest = new JPanel();
-		Guest.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		BodyContent.add(Guest);
-
-		JLabel lblWelcome = new JLabel("Welcome");
-		lblWelcome.setAlignmentY(0.0f);
-		lblWelcome.setPreferredSize(new Dimension(1024, 20));
-		Guest.add(lblWelcome);
-
-		JPanel guestContent = new JPanel();
-		guestContent.setPreferredSize(new Dimension(1024, 580));
-		guestContent.setAlignmentY(Component.TOP_ALIGNMENT);
-		guestContent.setAlignmentX(Component.LEFT_ALIGNMENT);
-		guestContent.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		Guest.add(guestContent);
-
-		JPanel sideBar = new JPanel();
-		sideBar.setPreferredSize(new Dimension(150, 535));
-		sideBar.setSize(new Dimension(25, 580));
-		sideBar.setMaximumSize(new Dimension(25, 580));
-		sideBar.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		guestContent.add(sideBar);
-
-		JButton btnNewButton_1 = new JButton("Best Sellers");
-		btnNewButton_1.setPreferredSize(new Dimension(144, 25));
 		sideBar.add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton("Recently Added");
+		btnNewButton_2 = new JButton("Recently Added");
 		btnNewButton_2.setPreferredSize(new Dimension(144, 25));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+			}
+		});
 		sideBar.add(btnNewButton_2);
 
-		JButton btnNewButton_3 = new JButton("Daily Deals");
+		btnNewButton_3 = new JButton("Daily Deals");
 		btnNewButton_3.setPreferredSize(new Dimension(144, 25));
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+			}
+		});
 		sideBar.add(btnNewButton_3);
+		
+	/*
+	 * frame -> frame_Card0_Content -> bodyContent Panel
+	 */
+		bodyContent = new JPanel();
+		bodyContent.setPreferredSize(new Dimension(800, 625));
+		bodyContent.setBorder(new LineBorder(Color.BLACK));
+		bodyContentLayout = new CardLayout();
+		bodyContent.setLayout(bodyContentLayout);
+		frame_Card0_Content.add(bodyContent);
 
-		JPanel scrollableItems = new JPanel();
+	/*
+	 * frame -> frame_Card0_Content -> bodyContent -> scrollableItems Panel
+	 */
+		scrollableItems = new JPanel();
 		scrollableItems.setPreferredSize(new Dimension(850, 535));
 		scrollableItems.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		guestContent.add(scrollableItems);
+		bodyContent.add(scrollableItems);
 
-		JList list = new JList();
-		list.setPreferredSize(new Dimension(800, 535));
+		list = new JList();
+		list.setPreferredSize(new Dimension(765, 605));
 		scrollableItems.add(list);
 
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setPreferredSize(new Dimension(15, 530));
+		scrollBar = new JScrollBar();
+		scrollBar.setPreferredSize(new Dimension(15, 605));
 		scrollableItems.add(scrollBar);
 
-		JPanel User = new JPanel();
-		BodyContent.add(User);
+	/*
+	 * frame -> frame_Card0_Content -> bodyContent -> user Panel
+	 */
+		user = new JPanel();
+		bodyContent.add(user);
 
-		JPanel Admin = new JPanel();
-		BodyContent.add(Admin);
+	/*
+	 * frame -> frame_Card0_Content -> bodyContent -> guest Panel
+	 */		
+		guest = new JPanel();
+		bodyContent.add(guest);
+
+	/*
+	 * frame -> frame_Card0_Content -> bodyContent -> admin Panel
+	 */
+		admin = new JPanel();
+		bodyContent.add(admin);
 		
-		JPanel Login = new JPanel();
-		BodyContent.add(Login, "Login_Panel");
-		GridBagLayout gbl_Login = new GridBagLayout();
-		gbl_Login.columnWidths = new int[]{0, 0};
-		gbl_Login.rowHeights = new int[]{0, 0};
-		gbl_Login.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_Login.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		Login.setLayout(gbl_Login);
+	/*
+	 * frame -> frame_Card1_Login Panel
+		frame_Card1_Login = new JPanel();
+		frame.getContentPane().add(frame_Card1_Login, "Card1_Login");
+		frame_Card1_Login_Layout = new BoxLayout();
+		frame_Card1_Login.setLayout(frame_Card1_Login_Layout);
+		 */
 		
-		JPanel sub_login = new JPanel();
-		sub_login.setPreferredSize(new Dimension(300, 150));
-		GridBagConstraints gbc_sub_login = new GridBagConstraints();
-		Login.add(sub_login, gbc_sub_login);
-		sub_login.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		frame_Card1_Login = new JPanel();
+		frame.getContentPane().add(frame_Card1_Login, "Card1_Login");
+		frame_Card1_Login_Layout = new GridBagLayout();
+		frame_Card1_Login_Layout.columnWidths = new int[]{0, 0};
+		frame_Card1_Login_Layout.rowHeights = new int[]{0, 0};
+		frame_Card1_Login_Layout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		frame_Card1_Login_Layout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		frame_Card1_Login.setLayout(frame_Card1_Login_Layout);
 		
-		textField = new JTextField();
-		textField.setMaximumSize(new Dimension(200, 19));
-		sub_login.add(textField);
-		textField.setColumns(20);
+		btn_frame_Card1_Login_return = new JButton("Return");
+		frame_Card1_Login.add(btn_frame_Card1_Login_return);
+		btn_frame_Card1_Login_return.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				frameContentPaneLayout.show(frame.getContentPane(), "Card0_Content");
+			}
+		});
 		
-		textField_1 = new JTextField();
-		sub_login.add(textField_1);
-		textField_1.setColumns(20);
+	/*
+	 * frame -> frame_Card1_Login -> sub_Login Panel
+	 */
+		sub_Login = new JPanel();
+		sub_Login.setBorder(new LineBorder(Color.BLACK));
+		sub_Login.setPreferredSize(new Dimension(300, 150));
+		gbc_Sub_Login = new GridBagConstraints();
+		frame_Card1_Login.add(sub_Login, gbc_Sub_Login);
+		sub_Login.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnNewButton_4 = new JButton("Login");
-		sub_login.add(btnNewButton_4);
+		textField_Username = new JTextField();
+		sub_Login.add(textField_Username);
+		textField_Username.setColumns(20);
 		
-		JButton btnNewButton_5 = new JButton("Create Account");
-		btnNewButton_5.setDefaultCapable(false);
-		sub_login.add(btnNewButton_5);
+		textField_Password = new JTextField();
+		sub_Login.add(textField_Password);
+		textField_Password.setColumns(20);
+		
+		btnNewButton_4 = new JButton("Login");
+		btnNewButton_4.setSize(new Dimension(120, 25));
+		sub_Login.add(btnNewButton_4);
+		
+		btnNewButton_5 = new JButton("Create Account");
+		btnNewButton_5.setSize(new Dimension(120, 25));
+		sub_Login.add(btnNewButton_5);
 
 	}
 }
